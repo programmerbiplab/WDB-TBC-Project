@@ -1,0 +1,1404 @@
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:07:36
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Uncaught Exception
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:07:36
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Internal Server Error
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:08:10
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Uncaught Exception
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:08:10
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Internal Server Error
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:08:14
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Uncaught Exception
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:08:14
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Internal Server Error
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:08:27
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Uncaught Exception
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:08:27
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Internal Server Error
+Request: GET /hotels
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 198, in hotels
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:09:06
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Uncaught Exception
+Request: POST /login
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\utils\security.py", line 84, in wrapped
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 474, in login
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:09:06
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Internal Server Error
+Request: POST /login
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\utils\security.py", line 84, in wrapped
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 474, in login
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:09:39
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Uncaught Exception
+Request: POST /login
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\utils\security.py", line 84, in wrapped
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 474, in login
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-18 22:09:39
+Type: RuntimeError
+Message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Context: Internal Server Error
+Request: POST /login
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\utils\security.py", line 84, in wrapped
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 474, in login
+    connection = get_db_connection()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 46, in get_db_connection
+    connection = pymysql.connect(
+        host=app.config['MYSQL_HOST'],
+    ...<3 lines>...
+        cursorclass=pymysql.cursors.DictCursor
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:35:16
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Uncaught Exception
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:35:16
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Internal Server Error
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:35:21
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Uncaught Exception
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:35:21
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Internal Server Error
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:35:26
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Uncaught Exception
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:35:26
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Internal Server Error
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:38:45
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Uncaught Exception
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:38:45
+Type: UndefinedError
+Message: 'user' is undefined
+Context: Internal Server Error
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1400, in admin_dashboard
+    return render_template(
+        'admin/dashboard.html',
+    ...<4 lines>...
+        recent_bookings=recent_bookings
+    )
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 109, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1412, in admin_dashboard
+    return render_template('admin/dashboard.html')
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\base.html", line 103, in top-level template code
+    {% block content %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\templates\admin\dashboard.html", line 11, in block 'content'
+    <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+    ^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:51:25
+Type: ProgrammingError
+Message: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+Context: Uncaught Exception
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'b.num_guests' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 127, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 140, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1344, in admin_dashboard
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        SELECT
+        ^^^^^^
+    ...<18 lines>...
+        LIMIT 10
+        ^^^^^^^^
+    """)
+    ^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:51:26
+Type: ProgrammingError
+Message: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+Context: Internal Server Error
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'b.num_guests' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 127, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 140, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1344, in admin_dashboard
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        SELECT
+        ^^^^^^
+    ...<18 lines>...
+        LIMIT 10
+        ^^^^^^^^
+    """)
+    ^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:51:28
+Type: ProgrammingError
+Message: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+Context: Uncaught Exception
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'b.num_guests' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 127, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 140, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1344, in admin_dashboard
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        SELECT
+        ^^^^^^
+    ...<18 lines>...
+        LIMIT 10
+        ^^^^^^^^
+    """)
+    ^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+
+============================================================
+
+============================================================
+ERROR LOG
+============================================================
+Timestamp: 2026-01-26 20:51:28
+Type: ProgrammingError
+Message: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+Context: Internal Server Error
+Request: GET /admin/dashboard
+IP: 127.0.0.1
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+============================================================
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'b.num_guests' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 127, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 140, in decorated_function
+    return f(*args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\app.py", line 1344, in admin_dashboard
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        SELECT
+        ^^^^^^
+    ...<18 lines>...
+        LIMIT 10
+        ^^^^^^^^
+    """)
+    ^^^^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\NITRO\Desktop\design-and-development-of-a-website-biplab12696969\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'b.num_guests' in 'field list'
+
+============================================================
