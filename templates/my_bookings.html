@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>My Bookings</h1>
+        <p>View and manage all your hotel reservations</p>
+    </div>
+</section>
+
+<!-- Bookings Content -->
+<section class="bookings-section">
+    <div class="container">
+        <!-- Export Button -->
+        <div class="export-section">
+            <a href="/my-bookings/export" class="btn-export">
+                📥 Export to CSV
+            </a>
+        </div>
+        <!-- Tabs for filtering -->
+        <div class="bookings-tabs">
+            <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+            <button class="tab-btn" data-tab="past">Past</button>
+            <button class="tab-btn" data-tab="cancelled">Cancelled</button>
+            <button class="tab-btn" data-tab="all">All Bookings</button>
+        </div>
+        
+        <!-- Bookings List -->
+        <div class="bookings-list">
+            {% if bookings %}
+                {% for booking in bookings %}
+                <div class="booking-card" data-status="{{ booking.status }}">
+                    <!-- Booking Header -->
+                    <div class="booking-header">
+                        <div class="booking-id">
+                            <strong>Booking ID:</strong> #{{ booking.booking_id }}
+                        </div>
+                        <div class="booking-status status-{{ booking.status }}">
+                            {{ booking.status|capitalize }}
+                        </div>
+                    </div>
+                    
+                    <!-- Booking Details -->
+                    <div class="booking-details">
+                        <div class="booking-info-grid">
+                            <!-- Hotel Info -->
+                            <div class="info-section">
+                                <h3>🏨 Hotel</h3>
+                                <p class="hotel-name">World Hotels {{ booking.hotel_city }}</p>
+                                <p class="hotel-address">{{ booking.hotel_address }}</p>
+                            </div>
+                            
+                            <!-- Dates -->
+                            <div class="info-section">
+                                <h3>📅 Dates</h3>
+                                <p><strong>Check-in:</strong> {{ booking.check_in_date.strftime('%d %B %Y') }}</p>
+                                <p><strong>Check-out:</strong> {{ booking.check_out_date.strftime('%d %B %Y') }}</p>
+                                <p><strong>Nights:</strong> {{ booking.nights }}</p>
+                            </div>
+                            
+                            <!-- Room Info -->
+                            <div class="info-section">
+                                <h3>🛏️ Room Details</h3>
+                                <p><strong>Type:</strong> {{ booking.room_type }}</p>
+                                <p><strong>Room:</strong> {{ booking.room_number }}</p>
+                                <p><strong>Guests:</strong> {{ booking.number_of_guests }}</p>
+                            </div>
+                            
+                            <!-- Pricing -->
+                            <div class="info-section">
+                                <h3>💷 Pricing</h3>
+                                <p><strong>Base Price:</strong> £{{ booking.base_price }}</p>
+                                {% if booking.discount_percentage > 0 %}
+                                <p class="discount"><strong>Discount:</strong> -{{ booking.discount_percentage }}% (£{{ booking.discount_amount }})</p>
+                                {% endif %}
+                                <p class="final-price"><strong>Total:</strong> £{{ booking.final_price }}</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Booking Date -->
+                        <div class="booking-meta">
+                            <small>Booked on: {{ booking.booking_date.strftime('%d %B %Y at %H:%M') }}</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="booking-actions">
+                        <a href="/receipt/{{ booking.booking_id }}" class="btn-action btn-view">
+                            View Receipt
+                        </a>
+                        
+                        {% if booking.status == 'confirmed' %}
+                            {% if booking.can_modify %}
+                            <a href="/booking/modify/{{ booking.booking_id }}" class="btn-action btn-modify">
+                                Modify Booking
+                            </a>
+                            {% endif %}
+                            
+                            <button class="btn-action btn-cancel" onclick="cancelBooking({{ booking.booking_id }}, {{ booking.days_until_checkin }})">
+                                Cancel Booking
+                            </button>
+                        {% endif %}
+                        
+                        {% if booking.status == 'completed' %}
+                        <button class="btn-action btn-review" onclick="leaveReview({{ booking.booking_id }})">
+                            Leave Review
+                        </button>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Cancellation Warning (if applicable) -->
+                    {% if booking.status == 'confirmed' and booking.days_until_checkin <= 60 %}
+                    <div class="cancellation-warning">
+                        <strong>⚠️ Cancellation Policy:</strong>
+                        {% if booking.days_until_checkin > 30 %}
+                            50% cancellation charge applies (£{{ booking.final_price * 0.5 }})
+                        {% else %}
+                            100% cancellation charge applies (£{{ booking.final_price }})
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- No Bookings -->
+                <div class="no-bookings">
+                    <div class="no-bookings-icon">📋</div>
+                    <h2>No Bookings Yet</h2>
+                    <p>You haven't made any bookings. Start exploring our hotels!</p>
+                    <a href="/hotels" class="btn-primary">Browse Hotels</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Tab switching functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        var tabBtns = document.querySelectorAll('.tab-btn');
+        var bookingCards = document.querySelectorAll('.booking-card');
+        
+        tabBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                // Remove active class from all tabs
+                tabBtns.forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                var filterStatus = this.getAttribute('data-tab');
+                
+                // Filter bookings
+                bookingCards.forEach(function(card) {
+                    var status = card.getAttribute('data-status');
+                    
+                    if (filterStatus === 'all') {
+                        card.style.display = 'block';
+                    } else if (filterStatus === 'upcoming') {
+                        // Show confirmed bookings with future dates
+                        card.style.display = status === 'confirmed' ? 'block' : 'none';
+                    } else if (filterStatus === 'past') {
+                        card.style.display = status === 'completed' ? 'block' : 'none';
+                    } else {
+                        card.style.display = status === filterStatus ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+    });
+    
+    // Cancel booking function
+    function cancelBooking(bookingId, daysUntilCheckin) {
+        var chargeMessage = '';
+        var chargePercentage = 0;
+        
+        if (daysUntilCheckin >= 60) {
+            chargeMessage = 'No cancellation charge will apply.';
+            chargePercentage = 0;
+        } else if (daysUntilCheckin >= 30) {
+            chargeMessage = 'A 50% cancellation charge will apply.';
+            chargePercentage = 50;
+        } else {
+            chargeMessage = 'A 100% cancellation charge will apply (no refund).';
+            chargePercentage = 100;
+        }
+        
+        if (confirm('Are you sure you want to cancel this booking?\n\n' + chargeMessage)) {
+            // Submit cancellation
+            window.location.href = '/booking/cancel/' + bookingId;
+        }
+    }
+    
+    // Leave review function (placeholder)
+    function leaveReview(bookingId) {
+        alert('Review functionality coming soon!');
+        // In real implementation, open review modal
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - Admin - World Hotels{% endblock %}
+
+{% block content %}
+
+<!-- Admin Header -->
+<section class="admin-header">
+    <div class="container">
+        <div class="admin-header-content">
+            <h1>Reports & Analytics</h1>
+            <p>Generate comprehensive business reports</p>
+        </div>
+        <div class="admin-actions">
+            <a href="/admin/dashboard" class="btn-secondary">← Back to Dashboard</a>
+        </div>
+    </div>
+</section>
+
+<!-- Report Selection -->
+<section class="reports-section">
+    <div class="container">
+
+        <!-- Report Cards -->
+        <div class="reports-grid">
+
+            <!-- Monthly Sales Report -->
+            <div class="report-card">
+                <div class="report-icon">📊</div>
+                <h3>Monthly Sales Report</h3>
+                <p>View total sales, bookings, and revenue by month</p>
+
+                <form action="/admin/reports/monthly-sales" method="POST">
+                    <div class="form-group">
+                        <label for="month_sales">Select Month</label>
+                        <input type="month" name="month" id="month_sales" required>
+                    </div>
+                    <button type="submit" class="btn-generate">Generate Report</button>
+                </form>
+            </div>
+
+            <!-- Sales Per Hotel -->
+            <div class="report-card">
+                <div class="report-icon">🏨</div>
+                <h3>Sales Per Hotel</h3>
+                <p>Compare performance across all hotel locations</p>
+
+                <form action="/admin/reports/hotel-sales" method="POST">
+                    <div class="form-group">
+                        <label for="period_hotel">Period</label>
+                        <select name="period" id="period_hotel">
+                            <option value="this_month">This Month</option>
+                            <option value="last_month">Last Month</option>
+                            <option value="this_year">This Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-generate">Generate Report</button>
+                </form>
+            </div>
+
+            <!-- Top Customers -->
+            <div class="report-card">
+                <div class="report-icon">👥</div>
+                <h3>Top Customers</h3>
+                <p>Identify most valuable customers by bookings and revenue</p>
+
+                <form action="/admin/reports/top-customers" method="POST">
+                    <div class="form-group">
+                        <label for="top_count">Show Top</label>
+                        <select name="count" id="top_count">
+                            <option value="10">Top 10</option>
+                            <option value="25">Top 25</option>
+                            <option value="50">Top 50</option>
+                            <option value="100">Top 100</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-generate">Generate Report</button>
+                </form>
+            </div>
+
+            <!-- Profit/Loss Analysis -->
+            <div class="report-card">
+                <div class="report-icon">💷</div>
+                <h3>Profit & Loss Analysis</h3>
+                <p>Analyze profitability by hotel and time period</p>
+
+                <form action="/admin/reports/profit-loss" method="POST">
+                    <div class="form-group">
+                        <label for="period_pl">Analysis Period</label>
+                        <select name="period" id="period_pl">
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-generate">Generate Report</button>
+                </form>
+            </div>
+
+            <!-- Occupancy Report -->
+            <div class="report-card">
+                <div class="report-icon">📈</div>
+                <h3>Occupancy Rates</h3>
+                <p>Track room occupancy across all hotels</p>
+
+                <form action="/admin/reports/occupancy" method="POST">
+                    <div class="form-group">
+                        <label for="date_from_occ">From Date</label>
+                        <input type="date" name="date_from" id="date_from_occ" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_to_occ">To Date</label>
+                        <input type="date" name="date_to" id="date_to_occ" required>
+                    </div>
+                    <button type="submit" class="btn-generate">Generate Report</button>
+                </form>
+            </div>
+
+            <!-- Revenue Breakdown -->
+            <div class="report-card">
+                <div class="report-icon">💰</div>
+                <h3>Revenue Breakdown</h3>
+                <p>Detailed revenue analysis by room type and season</p>
+
+                <form action="/admin/reports/revenue-breakdown" method="POST">
+                    <div class="form-group">
+                        <label for="breakdown_by">Break Down By</label>
+                        <select name="breakdown_by" id="breakdown_by">
+                            <option value="room_type">Room Type</option>
+                            <option value="season">Season</option>
+                            <option value="city">City</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-generate">Generate Report</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Quick Stats Overview -->
+<section class="reports-overview">
+    <div class="container">
+        <h2>Current Period Overview</h2>
+
+        <div class="overview-grid">
+
+            <div class="overview-card">
+                <h4>This Month</h4>
+                <div class="overview-stats">
+                    <div class="stat-item">
+                        <span class="label">Total Bookings:</span>
+                        <span class="value">{{ month_bookings or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Revenue:</span>
+                        <span class="value">£{{ month_revenue or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Avg. Occupancy:</span>
+                        <span class="value">{{ month_occupancy or 0 }}%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview-card">
+                <h4>This Year</h4>
+                <div class="overview-stats">
+                    <div class="stat-item">
+                        <span class="label">Total Bookings:</span>
+                        <span class="value">{{ year_bookings or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Revenue:</span>
+                        <span class="value">£{{ year_revenue or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Avg. Occupancy:</span>
+                        <span class="value">{{ year_occupancy or 0 }}%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview-card">
+                <h4>All Time</h4>
+                <div class="overview-stats">
+                    <div class="stat-item">
+                        <span class="label">Total Bookings:</span>
+                        <span class="value">{{ all_bookings or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Total Revenue:</span>
+                        <span class="value">£{{ all_revenue or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Total Customers:</span>
+                        <span class="value">{{ all_customers or 0 }}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Sample Report Data -->
+{% if report_data %}
+<section class="report-results">
+    <div class="container">
+        <h2>Report Results</h2>
+
+        <div class="report-content">
+            {{ report_data | safe }}
+        </div>
+
+        <div class="report-actions">
+            <button onclick="window.print()" class="btn-print">🖨️ Print Report</button>
+            <button onclick="exportPDF()" class="btn-export">📄 Export PDF</button>
+            <button onclick="exportExcel()" class="btn-export">📊 Export Excel</button>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function exportPDF() {
+        alert('PDF export functionality will be implemented in the backend');
+    }
+
+    function exportExcel() {
+        alert('Excel export functionality will be implemented in the backend');
+    }
+</script>
+{% endblock %}

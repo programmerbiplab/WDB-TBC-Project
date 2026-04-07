@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}World Hotels - Book Your Perfect Stay Across UK{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to World Hotels</h1>
+                <p class="hero-subtitle">Discover comfort and luxury across 17 beautiful UK cities</p>
+                
+                <!-- Quick Search Form -->
+                <form class="hero-search-form" action="/hotels" method="GET">
+                    <div class="search-inputs">
+                        <!-- City Selection -->
+                        <div class="search-field">
+                            <label for="city">Destination</label>
+                            <select name="city" id="city" required>
+                                <option value="">Select City</option>
+                                <option value="Aberdeen">Aberdeen</option>
+                                <option value="Belfast">Belfast</option>
+                                <option value="Birmingham">Birmingham</option>
+                                <option value="Bristol">Bristol</option>
+                                <option value="Cardiff">Cardiff</option>
+                                <option value="Edinburgh">Edinburgh</option>
+                                <option value="Glasgow">Glasgow</option>
+                                <option value="London">London</option>
+                                <option value="Manchester">Manchester</option>
+                                <option value="Newcastle">Newcastle</option>
+                                <option value="Norwich">Norwich</option>
+                                <option value="Nottingham">Nottingham</option>
+                                <option value="Oxford">Oxford</option>
+                                <option value="Plymouth">Plymouth</option>
+                                <option value="Swansea">Swansea</option>
+                                <option value="Bournemouth">Bournemouth</option>
+                                <option value="Kent">Kent</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Check-in Date -->
+                        <div class="search-field">
+                            <label for="check_in">Check-in</label>
+                            <input type="date" name="check_in" id="check_in" required>
+                        </div>
+                        
+                        <!-- Check-out Date -->
+                        <div class="search-field">
+                            <label for="check_out">Check-out</label>
+                            <input type="date" name="check_out" id="check_out" required>
+                        </div>
+                        
+                        <!-- Number of Guests -->
+                        <div class="search-field">
+                            <label for="guests">Guests</label>
+                            <select name="guests" id="guests" required>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Search Button -->
+                        <div class="search-field">
+                            <button type="submit" class="btn-search">Search Hotels</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <h2 class="section-title">Why Choose World Hotels?</h2>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">🏨</div>
+                <h3>17 UK Locations</h3>
+                <p>From London to Edinburgh, find your perfect stay in major UK cities.</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">💷</div>
+                <h3>Best Price Guarantee</h3>
+                <p>Enjoy up to 30% off with advance booking discounts.</p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Luxury Amenities</h3>
+                <p>WiFi, mini-bar, TV, and complimentary breakfast included.</p>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure Booking</h3>
+                <p>Your data is protected with industry-standard security.</p>
+            </div>
+            
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Flexible Cancellation</h3>
+                <p>Free cancellation up to 60 days before check-in.</p>
+            </div>
+            
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Multi-Currency</h3>
+                <p>View prices in GBP, USD, EUR, and more.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Destinations -->
+<section class="destinations-section">
+    <div class="container">
+        <h2 class="section-title">Popular Destinations</h2>
+        
+        <div class="destinations-grid">
+            <!-- Destination 1: London -->
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=600&fit=crop" 
+                         alt="London skyline with Big Ben">
+                    <div class="destination-overlay">
+                        <h3>London</h3>
+                        <p>5 Hotels Available</p>
+                        <a href="/hotels?city=London" class="btn-view">View Hotels</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Destination 2: Edinburgh -->
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1555633514-abcee6ab92e9?w=800&h=600&fit=crop" 
+                         alt="Edinburgh Castle">
+                    <div class="destination-overlay">
+                        <h3>Edinburgh</h3>
+                        <p>2 Hotels Available</p>
+                        <a href="/hotels?city=Edinburgh" class="btn-view">View Hotels</a>
+                </div>
+            </div>
+            
+            <!-- Destination 3: Manchester -->
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1592894930475-d6cdfed57e0d?w=800&h=600&fit=crop" 
+                         alt="Manchester city center">
+                    <div class="destination-overlay">
+                        <h3>Manchester</h3>
+                        <p>3 Hotels Available</p>
+                        <a href="/hotels?city=Manchester" class="btn-view">View Hotels</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Destination 4: Birmingham -->
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1602970120808-c44f9d810aaf?w=800&h=600&fit=crop" 
+                         alt="Birmingham skyline">
+                    <div class="destination-overlay">
+                        <h3>Birmingham</h3>
+                        <p>2 Hotels Available</p>
+                        <a href="/hotels?city=Birmingham" class="btn-view">View Hotels</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="view-all-cities">
+            <a href="/hotels" class="btn-primary">View All 17 Cities</a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Book Your Perfect Stay?</h2>
+            <p>Join thousands of satisfied guests across the UK</p>
+            <div class="cta-buttons">
+                <a href="/hotels" class="btn-primary">Browse Hotels</a>
+                <a href="/register" class="btn-secondary">Create Account</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Set minimum date to today for check-in
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('check_in').setAttribute('min', today);
+    
+    // Set check-out min date when check-in changes
+    document.getElementById('check_in').addEventListener('change', function() {
+        const checkIn = new Date(this.value);
+        const nextDay = new Date(checkIn);
+        nextDay.setDate(checkIn.getDate() + 1);
+        
+        const checkOutField = document.getElementById('check_out');
+        checkOutField.setAttribute('min', nextDay.toISOString().split('T')[0]);
+        
+        // Set max to 30 days after check-in (business rule)
+        const maxDate = new Date(checkIn);
+        maxDate.setDate(checkIn.getDate() + 30);
+        checkOutField.setAttribute('max', maxDate.toISOString().split('T')[0]);
+    });
+</script>
+{% endblock %}

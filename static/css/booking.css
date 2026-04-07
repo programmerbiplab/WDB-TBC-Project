@@ -1,0 +1,436 @@
+/* ============================================
+   BOOKING PAGES STYLES
+   ============================================ */
+
+/* Booking Header */
+.booking-header {
+    background: var(--bg-light);
+    padding: var(--spacing-lg) 0;
+}
+
+.booking-steps {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.step {
+    padding: 0.5rem 1.5rem;
+    background: white;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.step.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Booking Grid */
+.booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.booking-form-container {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.form-section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section h2 {
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.payment-option:hover {
+    border-color: var(--primary-color);
+    background: var(--bg-light);
+}
+
+.btn-book-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--success);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-book-submit:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Booking Summary Sidebar */
+.booking-summary {
+    position: relative;
+}
+
+.summary-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.summary-card.sticky {
+    position: sticky;
+    top: 90px;
+}
+
+.summary-card h3 {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.summary-hotel {
+    margin-bottom: var(--spacing-md);
+}
+
+.summary-hotel h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.summary-details,
+.summary-pricing {
+    margin-bottom: var(--spacing-md);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.total-row {
+    font-size: 1.125rem;
+    padding-top: var(--spacing-sm);
+    border-top: 2px solid var(--border-color);
+}
+
+.discount-row {
+    color: var(--success);
+}
+
+.currency-selector {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--border-color);
+}
+
+.currency-selector select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.summary-policies {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+}
+
+.summary-policies h4 {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.summary-policies ul {
+    list-style: none;
+}
+
+.summary-policies li {
+    margin-bottom: 0.25rem;
+}
+
+/* My Bookings Page */
+.bookings-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: all var(--transition-base);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.booking-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    transition: all var(--transition-base);
+}
+
+.booking-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.booking-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.info-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.booking-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.btn-view,
+.btn-modify,
+.btn-cancel,
+.btn-review {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-view {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.btn-modify {
+    background: var(--info);
+    color: white;
+    border: none;
+}
+
+.btn-cancel {
+    background: var(--error);
+    color: white;
+    border: none;
+}
+
+.btn-review {
+    background: var(--warning);
+    color: white;
+    border: none;
+}
+
+.cancellation-warning {
+    background: #fef3c7;
+    border-left: 4px solid var(--warning);
+    padding: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+/* Receipt Page */
+.receipt-section {
+    padding: var(--spacing-xl) 0;
+}
+
+.receipt-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.receipt-card {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.receipt-header-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.receipt-divider {
+    height: 2px;
+    background: var(--border-color);
+    margin: var(--spacing-lg) 0;
+}
+
+.receipt-section-block {
+    margin-bottom: var(--spacing-lg);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+.info-value {
+    color: var(--text-dark);
+}
+
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.price-table td {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.text-right {
+    text-align: right;
+}
+
+.receipt-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+}
+
+.btn-print,
+.btn-download {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-print {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.btn-download {
+    background: var(--success);
+    color: white;
+    border: none;
+}
+
+/* Responsive Booking */
+@media (max-width: 768px) {
+    .booking-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-card.sticky {
+        position: static;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .receipt-header-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print Styles for Receipt */
+@media print {
+    .receipt-actions,
+    .main-header,
+    .main-footer {
+        display: none !important;
+    }
+    
+    .receipt-card {
+        box-shadow: none;
+        padding: 0;
+    }
+}

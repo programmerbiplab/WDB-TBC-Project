@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Bookings - Admin - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Admin Header -->
+<section class="admin-header">
+    <div class="container">
+        <div class="admin-header-content">
+            <h1>Manage Bookings</h1>
+            <p>View and manage all customer bookings</p>
+        </div>
+        <div class="admin-actions">
+            <a href="/admin/dashboard" class="btn-secondary">← Back to Dashboard</a>
+            <button onclick="exportBookings()" class="btn-primary">📥 Export to CSV</button>
+        </div>
+    </div>
+</section>
+
+<!-- Bookings Filters -->
+<section class="admin-filters-section">
+    <div class="container">
+        <form class="admin-filters-form" method="GET">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="filter_status">Status</label>
+                    <select name="status" id="filter_status">
+                        <option value="">All Statuses</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filter_hotel">Hotel</label>
+                    <select name="hotel" id="filter_hotel">
+                        <option value="">All Hotels</option>
+                        {% for hotel in all_hotels %}
+                        <option value="{{ hotel.hotel_id }}">{{ hotel.city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filter_date_from">From Date</label>
+                    <input type="date" name="date_from" id="filter_date_from">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filter_date_to">To Date</label>
+                    <input type="date" name="date_to" id="filter_date_to">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="search">Search</label>
+                    <input type="text" name="search" id="search" placeholder="Booking ID, Guest name...">
+                </div>
+                
+                <div class="filter-group">
+                    <button type="submit" class="btn-filter">Apply Filters</button>
+                    <a href="/admin/bookings" class="btn-clear">Clear</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Bookings Table -->
+<section class="admin-content">
+    <div class="container">
+        <!-- Summary Stats -->
+        <div class="bookings-stats">
+            <div class="stat-box">
+                <span class="stat-label">Total Bookings:</span>
+                <span class="stat-value">{{ total_bookings or 0 }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Confirmed:</span>
+                <span class="stat-value confirmed">{{ confirmed_count or 0 }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Completed:</span>
+                <span class="stat-value completed">{{ completed_count or 0 }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Cancelled:</span>
+                <span class="stat-value cancelled">{{ cancelled_count or 0 }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Total Revenue:</span>
+                <span class="stat-value revenue">£{{ total_revenue or 0 }}</span>
+            </div>
+        </div>
+        
+        <!-- Bookings Table -->
+        <div class="table-responsive">
+            <table class="admin-table bookings-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Guest</th>
+                        <th>Hotel</th>
+                        <th>Room</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                        <th>Nights</th>
+                        <th>Guests</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Booked On</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if bookings %}
+                        {% for booking in bookings %}
+                        <tr class="booking-row-{{ booking.status }}">
+                            <td><strong>#{{ booking.booking_id }}</strong></td>
+                            <td>
+                                <div class="guest-info">
+                                    <strong>{{ booking.guest_name }}</strong><br>
+                                    <small>{{ booking.guest_email }}</small>
+                                </div>
+                            </td>
+                            <td>{{ booking.hotel_city }}</td>
+                            <td>{{ booking.room_type }} - {{ booking.room_number }}</td>
+                            <td>{{ booking.check_in_date }}</td>
+                            <td>{{ booking.check_out_date }}</td>
+                            <td>{{ booking.nights }}</td>
+                            <td>{{ booking.number_of_guests }}</td>
+                            <td>
+                                <strong>£{{ booking.final_price }}</strong>
+                                {% if booking.discount_percentage > 0 %}
+                                <br><small class="discount-badge">-{{ booking.discount_percentage }}%</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="status-badge status-{{ booking.status }}">
+                                    {{ booking.status|capitalize }}
+                                </span>
+                            </td>
+                            <td>
+                                <small>{{ booking.booking_date }}</small>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="/admin/booking/{{ booking.booking_id }}" class="btn-sm btn-view">View</a>
+                                    {% if booking.status == 'confirmed' %}
+                                    <button onclick="cancelBooking({{ booking.booking_id }})" class="btn-sm btn-cancel">Cancel</button>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="12" class="text-center">No bookings found</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination (if needed) -->
+        <div class="pagination">
+            <span>Showing {{ bookings|length }} of {{ total_bookings }} bookings</span>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function cancelBooking(bookingId) {
+        if (confirm('Are you sure you want to cancel booking #' + bookingId + '?\n\nCancellation charges will apply based on the cancellation policy.')) {
+            window.location.href = '/admin/booking/cancel/' + bookingId;
+        }
+    }
+    
+    function exportBookings() {
+        // Get filter values
+        var status = document.getElementById('filter_status').value;
+        var hotel = document.getElementById('filter_hotel').value;
+        var dateFrom = document.getElementById('filter_date_from').value;
+        var dateTo = document.getElementById('filter_date_to').value;
+        var search = document.getElementById('search').value;
+        
+        // Build query string
+        var params = [];
+        if (status) params.push('status=' + encodeURIComponent(status));
+        if (hotel) params.push('hotel=' + encodeURIComponent(hotel));
+        if (dateFrom) params.push('date_from=' + encodeURIComponent(dateFrom));
+        if (dateTo) params.push('date_to=' + encodeURIComponent(dateTo));
+        if (search) params.push('search=' + encodeURIComponent(search));
+        
+        var queryString = params.join('&');
+        window.location.href = '/admin/bookings/export' + (queryString ? '?' + queryString : '');
+    }
+</script>
+{% endblock %}

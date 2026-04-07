@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Booking Receipt - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Receipt Header -->
+<section class="receipt-header">
+    <div class="container">
+        <h1>Booking Confirmation</h1>
+        <p class="confirmation-message">✓ Your booking has been confirmed!</p>
+    </div>
+</section>
+
+<!-- Receipt Content -->
+<section class="receipt-section">
+    <div class="container">
+        <div class="receipt-container">
+            <!-- Receipt Card -->
+            <div class="receipt-card">
+                <!-- Receipt Header Info -->
+                <div class="receipt-header-info">
+                    <div class="company-info">
+                        <h2>World Hotels</h2>
+                        <p>Booking Receipt</p>
+                    </div>
+                    <div class="booking-id-large">
+                        <p>Booking ID</p>
+                        <h3>#{{ booking.booking_id }}</h3>
+                    </div>
+                </div>
+                
+                <!-- Guest Information -->
+                <div class="receipt-section-block">
+                    <h3>Guest Information</h3>
+                    <p><strong>Name:</strong> {{ booking.guest_name }}</p>
+                    <p><strong>Email:</strong> {{ booking.guest_email }}</p>
+                    <p><strong>Phone:</strong> {{ booking.guest_phone }}</p>
+                </div>
+                
+                <!-- Hotel Information -->
+                <div class="receipt-section-block">
+                    <h3>Hotel Information</h3>
+                    <p><strong>Hotel:</strong> World Hotels {{ booking.hotel_city }}</p>
+                    <p><strong>Address:</strong> {{ booking.hotel_address }}</p>
+                    <p><strong>Room Type:</strong> {{ booking.room_type }}</p>
+                    <p><strong>Room Number:</strong> {{ booking.room_number }}</p>
+                </div>
+                
+                <!-- Stay Details -->
+                <div class="receipt-section-block">
+                    <h3>Stay Details</h3>
+                    <p><strong>Check-in:</strong> {{ booking.check_in_date }} (After 2:00 PM)</p>
+                    <p><strong>Check-out:</strong> {{ booking.check_out_date }} (Before 11:00 AM)</p>
+                    <p><strong>Number of Nights:</strong> {{ booking.nights }}</p>
+                    <p><strong>Number of Guests:</strong> {{ booking.number_of_guests }}</p>
+                </div>
+                
+                <!-- Pricing Breakdown -->
+                <div class="receipt-section-block">
+                    <h3>Pricing Details</h3>
+                    <div class="pricing-breakdown">
+                        <div class="price-row">
+                            <span>Room Rate ({{ booking.nights }} nights):</span>
+                            <span>£{{ booking.base_price }}</span>
+                        </div>
+                        {% if booking.discount_percentage > 0 %}
+                        <div class="price-row discount-row">
+                            <span>Advance Booking Discount ({{ booking.discount_percentage }}%):</span>
+                            <span>-£{{ booking.discount_amount }}</span>
+                        </div>
+                        {% endif %}
+                        <div class="price-row total-row">
+                            <span><strong>Total Amount Paid:</strong></span>
+                            <span><strong>£{{ booking.final_price }}</strong></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Important Information -->
+                <div class="receipt-section-block">
+                    <h3>Important Information</h3>
+                    <ul class="info-list">
+                        <li>✓ This is your official booking confirmation</li>
+                        <li>✓ Please present this receipt at check-in</li>
+                        <li>✓ Check-in time: 2:00 PM onwards</li>
+                        <li>✓ Check-out time: Before 11:00 AM</li>
+                        <li>✓ Free cancellation up to 60 days before check-in</li>
+                        <li>⚠️ Cancellation charges apply for late cancellations</li>
+                    </ul>
+                </div>
+                
+                <!-- Cancellation Policy -->
+                <div class="receipt-section-block cancellation-policy">
+                    <h3>Cancellation Policy</h3>
+                    <ul>
+                        <li>Before 60 days of check-in: Free cancellation (0% charge)</li>
+                        <li>30-60 days before check-in: 50% cancellation charge</li>
+                        <li>Within 30 days of check-in: 100% cancellation charge (no refund)</li>
+                    </ul>
+                </div>
+                
+                <!-- Footer -->
+                <div class="receipt-footer">
+                    <p>Booking Date: {{ booking.booking_date }}</p>
+                    <p>Thank you for choosing World Hotels!</p>
+                    <p>We look forward to welcoming you!</p>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="receipt-actions">
+                <button onclick="window.print()" class="btn-print">🖨️ Print Receipt</button>
+                <a href="/my-bookings" class="btn-secondary">View All Bookings</a>
+                <a href="/hotels" class="btn-primary">Book Another Stay</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Print styles optimization
+    window.onload = function() {
+        // Add print-friendly class
+        document.body.classList.add('receipt-page');
+    };
+</script>
+{% endblock %}

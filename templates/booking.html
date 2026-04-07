@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}Book Your Stay - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Booking Header -->
+<section class="booking-header">
+    <div class="container">
+        <h1>Complete Your Booking</h1>
+        <div class="booking-steps">
+            <div class="step active">1. Details</div>
+            <div class="step">2. Review</div>
+            <div class="step">3. Confirm</div>
+        </div>
+    </div>
+</section>
+
+<!-- Booking Content -->
+<section class="booking-section">
+    <div class="container">
+        <div class="booking-grid">
+            <!-- Booking Form -->
+            <div class="booking-form-container">
+                <form class="booking-form" action="/booking/create" method="POST" id="bookingForm">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <!-- Hidden Fields -->
+                    <input type="hidden" name="hotel_id" value="{{ hotel.hotel_id }}">
+                    
+                    <!-- Guest Information -->
+                    <div class="form-section">
+                        <h2>Guest Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" id="first_name" name="first_name" 
+                                       value="{{ user.first_name if user else '' }}" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" id="last_name" name="last_name" 
+                                       value="{{ user.last_name if user else '' }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" 
+                                   value="{{ user.email if user else '' }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" 
+                                   value="{{ user.phone if user else '' }}" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Stay Details -->
+                    <div class="form-section">
+                        <h2>Stay Details</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="check_in">Check-in Date</label>
+                                <input type="date" id="check_in" name="check_in" required 
+                                       min="{{ today }}">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="check_out">Check-out Date</label>
+                                <input type="date" id="check_out" name="check_out" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="room_type">Room Type</label>
+                                <select id="room_type" name="room_type" required>
+                                    <option value="">Select Room Type</option>
+                                    {% for room_type in room_types %}
+                                    <option value="{{ room_type.room_type_id }}">
+                                        {{ room_type.type_name }} (Max {{ room_type.max_guests }} guests)
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="num_guests">Number of Guests</label>
+                                <select id="num_guests" name="num_guests" required>
+                                    <option value="1">1 Guest</option>
+                                    <option value="2">2 Guests</option>
+                                    <option value="3">3 Guests</option>
+                                    <option value="4">4 Guests</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="special_requests">Special Requests (Optional)</label>
+                            <textarea id="special_requests" name="special_requests" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Terms -->
+                    <div class="form-section">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="accept_terms" required>
+                            <label for="accept_terms">
+                                I agree to the <a href="/terms" target="_blank">Terms & Conditions</a> 
+                                and understand the <a href="/cancellation" target="_blank">Cancellation Policy</a>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <button type="submit" class="btn-book-submit">Confirm Booking</button>
+                </form>
+            </div>
+            
+            <!-- Summary Sidebar -->
+            <div class="booking-summary">
+                <div class="summary-card">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span>Hotel:</span>
+                            <span>{{ hotel.city }}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Check-in:</span>
+                            <span id="summary_check_in">--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Check-out:</span>
+                            <span id="summary_check_out">--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Nights:</span>
+                            <span id="summary_nights">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Room Type:</span>
+                            <span id="summary_room_type">--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Guests:</span>
+                            <span id="summary_guests">--</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Estimated Total:</span>
+                            <span id="summary_total">£0.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Price Breakdown (hidden until calculated) -->
+                <div class="price-breakdown" id="priceBreakdown" style="display: none;">
+                    <h4>Price Breakdown</h4>
+                    <div class="breakdown-item">
+                        <span>Base Price:</span>
+                        <span id="breakdown_base">£0.00</span>
+                    </div>
+                    <div class="breakdown-item discount">
+                        <span>Discount:</span>
+                        <span id="breakdown_discount">-£0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Set today's date
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('check_in').setAttribute('min', today);
+
+// Calculate summary when form changes
+document.getElementById('check_in').addEventListener('change', updateSummary);
+document.getElementById('check_out').addEventListener('change', updateSummary);
+document.getElementById('room_type').addEventListener('change', updateSummary);
+document.getElementById('num_guests').addEventListener('change', updateSummary);
+
+// Initialize summary
+updateSummary();
+
+function updateSummary() {
+    const checkIn = document.getElementById('check_in').value;
+    const checkOut = document.getElementById('check_out').value;
+    const roomType = document.getElementById('room_type').value;
+    const guests = document.getElementById('num_guests').value;
+    
+    // Update basic summary
+    document.getElementById('summary_check_in').textContent = checkIn || '--';
+    document.getElementById('summary_check_out').textContent = checkOut || '--';
+    document.getElementById('summary_guests').textContent = guests || '--';
+    
+    // Update room type name
+    if (roomType) {
+        const roomTypeSelect = document.getElementById('room_type');
+        const selectedOption = roomTypeSelect.options[roomTypeSelect.selectedIndex];
+        document.getElementById('summary_room_type').textContent = selectedOption.text.split('(')[0].trim();
+    } else {
+        document.getElementById('summary_room_type').textContent = '--';
+    }
+    
+    // Calculate nights
+    if (checkIn && checkOut) {
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+        const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+        document.getElementById('summary_nights').textContent = nights;
+        
+        // Calculate price if all info available
+        if (roomType && nights > 0) {
+            calculatePrice(checkInDate, nights, roomType);
+        } else {
+            resetPrice();
+        }
+    } else {
+        document.getElementById('summary_nights').textContent = '0';
+        resetPrice();
+    }
+}
+
+function calculatePrice(checkInDate, nights, roomTypeId) {
+    // This would typically make an AJAX call to calculate price
+    // For now, we'll use a simplified calculation
+    const pricePerNight = getRoomTypePrice(roomTypeId);
+    const basePrice = pricePerNight * nights;
+    
+    // Calculate discount based on advance booking
+    const today = new Date();
+    const daysAdvance = Math.ceil((checkInDate - today) / (1000 * 60 * 60 * 24));
+    let discountPercentage = 0;
+    
+    if (daysAdvance >= 80) discountPercentage = 30;
+    else if (daysAdvance >= 60) discountPercentage = 20;
+    else if (daysAdvance >= 45) discountPercentage = 10;
+    
+    const discountAmount = basePrice * (discountPercentage / 100);
+    const finalPrice = basePrice - discountAmount;
+    
+    // Update UI
+    document.getElementById('summary_total').textContent = `£${finalPrice.toFixed(2)}`;
+    document.getElementById('breakdown_base').textContent = `£${basePrice.toFixed(2)}`;
+    document.getElementById('breakdown_discount').textContent = `-£${discountAmount.toFixed(2)} (${discountPercentage}%)`;
+    document.getElementById('priceBreakdown').style.display = 'block';
+}
+
+function getRoomTypePrice(roomTypeId) {
+    // Hardcoded prices for demo - should come from database
+    const prices = {
+        '1': 80,   // Standard
+        '2': 120,  // Double
+        '3': 180   // Family
+    };
+    return prices[roomTypeId] || 100;
+}
+
+function resetPrice() {
+    document.getElementById('summary_total').textContent = '£0.00';
+    document.getElementById('priceBreakdown').style.display = 'none';
+}
+</script>
+{% endblock %}

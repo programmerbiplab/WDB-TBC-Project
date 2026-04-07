@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Access Forbidden - World Hotels{% endblock %}
+
+{% block content %}
+<section class="error-section">
+    <div class="container">
+        <div class="error-content">
+            <h1 class="error-code">403</h1>
+            <h2>Access Forbidden</h2>
+            <p>You don't have permission to access this resource.</p>
+            <div class="error-actions">
+                <a href="/" class="btn-primary">Go to Homepage</a>
+                {% if not session.user_id %}
+                <a href="/login" class="btn-secondary">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.error-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+}
+
+.error-code {
+    font-size: 8rem;
+    color: var(--error);
+    margin: 0;
+    font-weight: 700;
+}
+
+.error-content h2 {
+    font-size: 2rem;
+    margin: 1rem 0;
+    color: var(--text-dark);
+}
+
+.error-content p {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+</style>
+{% endblock %}

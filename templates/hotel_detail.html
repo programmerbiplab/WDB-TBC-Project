@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}{{ hotel.city }} Hotel - World Hotels{% endblock %}
+
+{% block content %}
+
+<!-- Hotel Header -->
+<section class="hotel-detail-header">
+    <div class="container">
+        <h1>World Hotels {{ hotel.city }}</h1>
+        <p>📍 {{ hotel.address }}</p>
+        <p>🏨 {{ hotel.capacity }} Total Rooms</p>
+    </div>
+</section>
+
+<!-- Hotel Gallery -->
+<section class="hotel-gallery">
+    <div class="container gallery-grid">
+        <div class="gallery-main">
+            <img src="/static/images/hotels/{{ hotel.city|lower }}-1.jpg"
+                 alt="{{ hotel.city }} Hotel"
+                 onerror="this.src='/static/images/placeholder-hotel.jpg'">
+        </div>
+
+        <div class="gallery-thumbnails">
+            <img src="/static/images/hotels/{{ hotel.city|lower }}-2.jpg" onerror="this.src='/static/images/placeholder.jpg'">
+            <img src="/static/images/hotels/{{ hotel.city|lower }}-3.jpg" onerror="this.src='/static/images/placeholder.jpg'">
+            <img src="/static/images/hotels/{{ hotel.city|lower }}-4.jpg" onerror="this.src='/static/images/placeholder.jpg'">
+        </div>
+    </div>
+</section>
+
+<!-- Hotel Details -->
+<section class="hotel-details-section">
+    <div class="container details-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="hotel-information">
+
+            <h2>About This Hotel</h2>
+            <p>
+                Experience comfort and luxury at World Hotels {{ hotel.city }}.
+                Located in the heart of {{ hotel.city }}, offering premium hospitality.
+            </p>
+
+            <!-- Amenities -->
+            <h3>Amenities</h3>
+            <ul class="amenities-grid">
+                <li>📶 Free WiFi</li>
+                <li>🍳 Breakfast Included</li>
+                <li>📺 Flat-Screen TV</li>
+                <li>🍷 Mini-bar</li>
+                <li>🅿️ Free Parking</li>
+                <li>🏋️ Fitness Center</li>
+            </ul>
+
+            <!-- Room Types -->
+            <h3>Room Types & Pricing</h3>
+
+            {% for room_type in room_types %}
+            <div class="room-type-card">
+
+                <h4>{{ room_type.type_name }} Room</h4>
+                <p>Max {{ room_type.max_guests }} guest(s)</p>
+
+                <ul>
+                    {% if room_type.has_wifi %}<li>✓ Free WiFi</li>{% endif %}
+                    {% if room_type.has_tv %}<li>✓ Flat-Screen TV</li>{% endif %}
+                    {% if room_type.has_minibar %}<li>✓ Mini-bar</li>{% endif %}
+                    {% if room_type.includes_breakfast %}<li>✓ Breakfast Included</li>{% endif %}
+                </ul>
+
+                <!-- Pricing Table -->
+                <table class="pricing-table">
+                    <tr>
+                        <th>Season</th>
+                        <th>Price / Night</th>
+                    </tr>
+
+                    {% for price in room_type.prices %}
+                    <tr>
+                        <td>{{ price.season_name }}</td>
+                        <td><strong>£{{ price.price_gbp }}</strong></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                <p><strong>{{ room_type.available_rooms }}</strong> rooms available</p>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- RIGHT COLUMN (BOOKING) -->
+        <aside class="booking-sidebar">
+
+            <div class="booking-card">
+                <h3>Book Your Stay</h3>
+
+                <form action="/booking" method="GET">
+                    <input type="hidden" name="hotel_id" value="{{ hotel.hotel_id }}">
+
+                    <label>Check-in</label>
+                    <input type="date" name="check_in" id="check_in_date" required min="{{ today }}">
+
+                    <label>Check-out</label>
+                    <input type="date" name="check_out" id="check_out_date" required>
+
+                    <label>Room Type</label>
+                    <select name="room_type" required>
+                        <option value="">Select</option>
+                        {% for room_type in room_types %}
+                        <option value="{{ room_type.room_type_id }}">
+                            {{ room_type.type_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Guests</label>
+                    <select name="guests" required>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+
+                    <button type="submit">Continue to Booking</button>
+                </form>
+
+                <div class="trust-badges">
+                    <p>🔒 Secure Booking</p>
+                    <p>✓ Best Price Guarantee</p>
+                    <p>📧 Instant Confirmation</p>
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById("check_in_date").addEventListener("change", function () {
+    const checkIn = new Date(this.value);
+    const minOut = new Date(checkIn);
+    minOut.setDate(minOut.getDate() + 1);
+
+    document.getElementById("check_out_date")
+        .setAttribute("min", minOut.toISOString().split("T")[0]);
+});
+</script>
+{% endblock %}

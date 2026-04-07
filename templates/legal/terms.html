@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Terms & Conditions - World Hotels{% endblock %}
+
+{% block content %}
+<section class="legal-section">
+    <div class="container">
+        <h1>Terms & Conditions</h1>
+        <div class="legal-content">
+            <p>Last updated: {{ datetime.now().strftime('%B %d, %Y') }}</p>
+            
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing and using World Hotels website, you accept and agree to be bound by these Terms and Conditions.</p>
+            
+            <h2>2. Booking Terms</h2>
+            <ul>
+                <li>All bookings are subject to availability</li>
+                <li>Prices are in GBP and include VAT where applicable</li>
+                <li>Check-in time: 3:00 PM, Check-out time: 11:00 AM</li>
+                <li>Special requests are subject to availability</li>
+            </ul>
+            
+            <h2>3. Payment Terms</h2>
+            <p>Full payment is required at the time of booking for standard reservations.</p>
+            
+            <h2>4. Cancellation Policy</h2>
+            <p>Cancellations made more than 60 days before check-in receive full refund. See <a href="/cancellation">Cancellation Policy</a> for details.</p>
+            
+            <h2>5. Contact Us</h2>
+            <p>For questions about these Terms, contact us at legal@worldhotels.com</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

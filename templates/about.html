@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - World Hotels UK{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>About World Hotels</h1>
+        <p>Your trusted partner for comfortable stays across the UK</p>
+    </div>
+</section>
+
+<!-- About Content -->
+<section class="about-content">
+    <div class="container">
+        <div class="about-intro">
+            <h2>Welcome to World Hotels</h2>
+            <p class="lead">Since our establishment, World Hotels has been committed to providing exceptional hospitality experiences across 17 beautiful UK cities. We believe that every journey deserves a comfortable home away from home.</p>
+        </div>
+        
+        <!-- Our Story -->
+        <div class="our-story">
+            <div class="story-grid">
+                <div class="story-text">
+                    <h3>Our Story</h3>
+                    <p>World Hotels began with a simple vision: to create a network of welcoming, comfortable hotels across the United Kingdom's most vibrant cities. From our first property to our current 17 locations, we've maintained our commitment to quality, service, and guest satisfaction.</p>
+                    <p>Each of our hotels reflects the unique character of its city while maintaining the consistent standards of comfort and service our guests have come to expect.</p>
+                </div>
+                <div class="story-image">
+                    <img src="/static/images/about-story.jpg" alt="Our Story" onerror="this.src='/static/images/placeholder.jpg'">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Our Values -->
+        <div class="our-values">
+            <h3>Our Values</h3>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🏆</div>
+                    <h4>Excellence</h4>
+                    <p>We strive for excellence in every aspect of our service, from the cleanliness of our rooms to the warmth of our welcome.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">💚</div>
+                    <h4>Sustainability</h4>
+                    <p>We're committed to reducing our environmental impact through sustainable practices and eco-friendly initiatives.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h4>Integrity</h4>
+                    <p>We operate with transparency and honesty, ensuring fair pricing and clear communication with all our guests.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">❤️</div>
+                    <h4>Guest-Centric</h4>
+                    <p>Our guests are at the heart of everything we do. Your comfort and satisfaction are our top priorities.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Why Choose Us -->
+        <div class="why-choose-us">
+            <h3>Why Choose World Hotels?</h3>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <span class="benefit-number">01</span>
+                    <div class="benefit-content">
+                        <h4>17 Prime Locations</h4>
+                        <p>From London to Edinburgh, we're positioned in the heart of the UK's most exciting cities.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <span class="benefit-number">02</span>
+                    <div class="benefit-content">
+                        <h4>Consistent Quality</h4>
+                        <p>Every World Hotels property meets our high standards for comfort, cleanliness, and service.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <span class="benefit-number">03</span>
+                    <div class="benefit-content">
+                        <h4>Best Price Guarantee</h4>
+                        <p>Book directly with us for the best rates, plus enjoy up to 30% off with advance booking.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <span class="benefit-number">04</span>
+                    <div class="benefit-content">
+                        <h4>Flexible Policies</h4>
+                        <p>Free cancellation up to 60 days before check-in gives you peace of mind when booking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics -->
+        <div class="statistics-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">17</div>
+                    <div class="stat-label">UK Cities</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">1,740</div>
+                    <div class="stat-label">Total Rooms</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Happy Guests</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">4.8/5</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="about-cta">
+    <div class="container">
+        <div class="cta-box">
+            <h2>Ready to Experience World Hotels?</h2>
+            <p>Book your next stay with us and discover the difference</p>
+            <a href="/hotels" class="btn-primary">Browse Our Hotels</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

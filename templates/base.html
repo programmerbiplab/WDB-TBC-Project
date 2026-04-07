@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="World Hotels - Book your perfect stay across 17 UK cities">
+    <meta name="keywords" content="hotel booking, UK hotels, World Hotels, accommodation">
+    <meta name="author" content="Biplab">
+    
+    <title>{% block title %}World Hotels - Book Your Perfect Stay{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=6.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+    
+    <!-- Favicon (optional for now) -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <!-- Logo/Brand -->
+                <div class="navbar-brand">
+                    <a href="/" class="logo">
+                        <h1>World Hotels</h1>
+                        <p class="tagline">Your Home Away From Home</p>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Navigation Links -->
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/hotels">Hotels</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                
+                    <!-- Currency Selector -->
+                    <li class="currency-selector-nav">
+                        <form action="/set-currency" method="POST" class="currency-form-inline">
+                            <select name="currency" onchange="this.form.submit()" class="currency-select">
+                                <option value="GBP" {% if session.get('preferred_currency', 'GBP') == 'GBP' %}selected{% endif %}>£ GBP</option>
+                                <option value="USD" {% if session.get('preferred_currency', 'GBP') == 'USD' %}selected{% endif %}>$ USD</option>
+                                <option value="EUR" {% if session.get('preferred_currency', 'GBP') == 'EUR' %}selected{% endif %}>€ EUR</option>
+                                <option value="NPR" {% if session.get('preferred_currency', 'GBP') == 'NPR' %}selected{% endif %}>रू NPR</option>
+                                <option value="INR" {% if session.get('preferred_currency', 'GBP') == 'INR' %}selected{% endif %}>₹ INR</option>
+                            </select>
+                        </form>
+                    </li>
+                    
+                    <!-- User Authentication Links -->
+                    {% if session.get('user_id') %}
+                        <li><a href="/profile">My Profile</a></li>
+                        <li><a href="/my-bookings">My Bookings</a></li>
+
+                    {% if session.get('user_type') == 'admin' %}
+                        <li>
+                            <a href="{{ url_for('admin_dashboard') }}" class="admin-link">
+                                Admin Panel
+                           </a>
+                       </li>
+                    {% endif %}
+
+                    <li><a href="/logout" class="btn-logout">Logout</a></li>
+                {% else %}
+
+                        <!-- Not Logged In -->
+                        <li><a href="/login" class="btn-login">Login</a></li>
+                        <li><a href="/register" class="btn-register">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Flash Messages (for success/error notifications) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">
+                        <p>{{ message }}</p>
+                        <button class="close-flash" onclick="this.parentElement.remove()">&times;</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <!-- Main Content Area (Each page fills this) -->
+    <main class="main-content">
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Column 1: About -->
+                <div class="footer-column">
+                    <h3>World Hotels</h3>
+                    <p>Experience comfort and luxury across 17 beautiful UK cities. Your perfect stay awaits!</p>
+                </div>
+                
+                <!-- Footer Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/hotels">Browse Hotels</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/terms">Terms & Conditions</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Footer Column 3: Contact Info -->
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📧 info@worldhotels.com</li>
+                        <li>📞 +44 20 1234 5678</li>
+                        <li>📍 London, United Kingdom</li>
+                    </ul>
+                </div>
+                
+                <!-- Footer Column 4: Legal (LESP) -->
+                <div class="footer-column">
+                    <h3>Legal & Ethics</h3>
+                    <ul>
+                        <li><a href="/gdpr">GDPR Compliance</a></li>
+                        <li><a href="/accessibility">Accessibility</a></li>
+                        <li><a href="/cookies">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 World Hotels. All rights reserved.</p>
+                <p>Student Project - UFCFES-30-1 - The British College, Nepal (UWE Accredited)</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript Files -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

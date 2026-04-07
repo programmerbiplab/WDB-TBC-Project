@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Admin Header -->
+<section class="admin-header">
+    <div class="container">
+        <div class="admin-header-content">
+            <h1>Admin Dashboard</h1>
+            <p>Welcome back, {{ user.first_name }}! Here's your system overview.</p>
+        </div>
+        <div class="admin-actions">
+            <a href="/admin/hotels" class="btn-primary">Manage Hotels</a>
+            <a href="/admin/bookings" class="btn-secondary">View Bookings</a>
+        </div>
+    </div>
+</section>
+
+<!-- Dashboard Stats -->
+<section class="dashboard-stats">
+    <div class="container">
+        <div class="stats-grid">
+            <!-- Total Bookings -->
+            <div class="stat-card">
+                <div class="stat-icon">📋</div>
+                <div class="stat-content">
+                    <h3>{{ total_bookings or 0 }}</h3>
+                    <p>Total Bookings</p>
+                </div>
+                <div class="stat-trend positive">+12% this month</div>
+            </div>
+            
+            <!-- Active Bookings -->
+            <div class="stat-card">
+                <div class="stat-icon">✓</div>
+                <div class="stat-content">
+                    <h3>{{ active_bookings or 0 }}</h3>
+                    <p>Active Bookings</p>
+                </div>
+                <div class="stat-trend positive">+5% this week</div>
+            </div>
+            
+            <!-- Total Revenue -->
+            <div class="stat-card">
+                <div class="stat-icon">💷</div>
+                <div class="stat-content">
+                    <h3>£{{ total_revenue or 0 }}</h3>
+                    <p>Total Revenue</p>
+                </div>
+                <div class="stat-trend positive">+18% this month</div>
+            </div>
+            
+            <!-- Total Hotels -->
+            <div class="stat-card">
+                <div class="stat-icon">🏨</div>
+                <div class="stat-content">
+                    <h3>17</h3>
+                    <p>Total Hotels</p>
+                </div>
+                <div class="stat-trend neutral">Across UK</div>
+            </div>
+            
+            <!-- Total Rooms -->
+            <div class="stat-card">
+                <div class="stat-icon">🛏️</div>
+                <div class="stat-content">
+                    <h3>1,740</h3>
+                    <p>Total Rooms</p>
+                </div>
+                <div class="stat-trend neutral">All locations</div>
+            </div>
+            
+            <!-- Occupancy Rate -->
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <h3>{{ occupancy_rate or 0 }}%</h3>
+                    <p>Occupancy Rate</p>
+                </div>
+                <div class="stat-trend positive">+3% vs last month</div>
+            </div>
+            
+            <!-- Total Users -->
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-content">
+                    <h3>{{ total_users or 0 }}</h3>
+                    <p>Registered Users</p>
+                </div>
+                <div class="stat-trend positive">+24 new this month</div>
+            </div>
+            
+            <!-- Cancelled Bookings -->
+            <div class="stat-card warning">
+                <div class="stat-icon">❌</div>
+                <div class="stat-content">
+                    <h3>{{ cancelled_bookings or 0 }}</h3>
+                    <p>Cancelled Bookings</p>
+                </div>
+                <div class="stat-trend negative">2% cancellation rate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Actions -->
+<section class="dashboard-quick-actions">
+    <div class="container">
+        <h2>Quick Actions</h2>
+        <div class="quick-actions-grid">
+            <a href="/admin/hotels/add" class="action-card">
+                <span class="action-icon">➕</span>
+                <h3>Add New Hotel</h3>
+                <p>Add a new hotel location</p>
+            </a>
+            
+            <a href="/admin/bookings" class="action-card">
+                <span class="action-icon">📋</span>
+                <h3>View All Bookings</h3>
+                <p>Manage customer bookings</p>
+            </a>
+            
+            <a href="/admin/reports" class="action-card">
+                <span class="action-icon">📊</span>
+                <h3>Generate Reports</h3>
+                <p>View analytics and reports</p>
+            </a>
+            
+            <a href="/admin/users" class="action-card">
+                <span class="action-icon">👥</span>
+                <h3>Manage Users</h3>
+                <p>View and edit user accounts</p>
+            </a>
+            
+            <a href="/admin/pricing" class="action-card">
+                <span class="action-icon">💷</span>
+                <h3>Update Pricing</h3>
+                <p>Manage room prices</p>
+            </a>
+            
+            <a href="/admin/currencies" class="action-card">
+                <span class="action-icon">💱</span>
+                <h3>Exchange Rates</h3>
+                <p>Update currency rates</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Bookings -->
+<section class="dashboard-recent">
+    <div class="container">
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Recent Bookings</h2>
+                <a href="/admin/bookings" class="btn-link">View All →</a>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Guest Name</th>
+                            <th>Hotel</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if recent_bookings %}
+                            {% for booking in recent_bookings %}
+                            <tr>
+                                <td>#{{ booking.booking_id }}</td>
+                                <td>{{ booking.guest_name }}</td>
+                                <td>{{ booking.hotel_city }}</td>
+                                <td>{{ booking.check_in_date }}</td>
+                                <td>{{ booking.check_out_date }}</td>
+                                <td>£{{ booking.final_price }}</td>
+                                <td>
+                                    <span class="status-badge status-{{ booking.status }}">
+                                        {{ booking.status|capitalize }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="/admin/booking/{{ booking.booking_id }}" class="btn-sm">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="8" class="text-center">No recent bookings</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Top Performing Hotels -->
+<section class="dashboard-performance">
+    <div class="container">
+        <div class="performance-grid">
+            <!-- Top Hotels by Revenue -->
+            <div class="performance-card">
+                <h3>Top Hotels by Revenue</h3>
+                <div class="performance-list">
+                    <div class="performance-item">
+                        <span class="rank">1</span>
+                        <span class="hotel-name">London</span>
+                        <span class="performance-value">£{{ london_revenue or 0 }}</span>
+                    </div>
+                    <div class="performance-item">
+                        <span class="rank">2</span>
+                        <span class="hotel-name">Edinburgh</span>
+                        <span class="performance-value">£{{ edinburgh_revenue or 0 }}</span>
+                    </div>
+                    <div class="performance-item">
+                        <span class="rank">3</span>
+                        <span class="hotel-name">Manchester</span>
+                        <span class="performance-value">£{{ manchester_revenue or 0 }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Top Customers -->
+            <div class="performance-card">
+                <h3>Top Customers</h3>
+                <div class="performance-list">
+                    {% if top_customers %}
+                        {% for customer in top_customers[:3] %}
+                        <div class="performance-item">
+                            <span class="rank">{{ loop.index }}</span>
+                            <span class="customer-name">{{ customer.name }}</span>
+                            <span class="performance-value">{{ customer.bookings }} bookings</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No customer data available</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Status -->
+<section class="dashboard-system">
+    <div class="container">
+        <h2>System Status</h2>
+        <div class="system-status-grid">
+            <div class="status-item status-ok">
+                <span class="status-icon">✓</span>
+                <span>Database: Online</span>
+            </div>
+            <div class="status-item status-ok">
+                <span class="status-icon">✓</span>
+                <span>Payment Gateway: Active</span>
+            </div>
+            <div class="status-item status-ok">
+                <span class="status-icon">✓</span>
+                <span>Email Service: Running</span>
+            </div>
+            <div class="status-item status-ok">
+                <span class="status-icon">✓</span>
+                <span>Backup: Last run 2 hours ago</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

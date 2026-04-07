@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Profile Header -->
+<section class="profile-header">
+    <div class="container">
+        <div class="profile-header-content">
+            <div class="profile-avatar">
+                <div class="avatar-circle">
+                    {{ user.first_name[0] }}{{ user.last_name[0] }}
+                </div>
+            </div>
+            <div class="profile-info">
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <p class="user-email">{{ user.email }}</p>
+                <p class="member-since">Member since {{ user.created_at.strftime('%B %Y') }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Profile Content -->
+<section class="profile-content">
+    <div class="container">
+        <div class="profile-grid">
+            <!-- Sidebar Navigation -->
+            <div class="profile-sidebar">
+                <nav class="profile-nav">
+                    <a href="#personal-info" class="profile-nav-item active">
+                        <span class="nav-icon">👤</span>
+                        Personal Information
+                    </a>
+                    <a href="#security" class="profile-nav-item">
+                        <span class="nav-icon">🔒</span>
+                        Security & Password
+                    </a>
+                    <a href="/my-bookings" class="profile-nav-item">
+                        <span class="nav-icon">📋</span>
+                        My Bookings
+                    </a>
+                    <a href="#preferences" class="profile-nav-item">
+                        <span class="nav-icon">⚙️</span>
+                        Preferences
+                    </a>
+                </nav>
+                
+                <!-- Quick Stats -->
+                <div class="profile-stats">
+                    <h3>Your Statistics</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Bookings</span>
+                        <span class="stat-value">{{ user.total_bookings or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Upcoming Stays</span>
+                        <span class="stat-value">{{ user.upcoming_bookings or 0 }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Spent</span>
+                        <span class="stat-value">£{{ user.total_spent or 0 }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content Area -->
+            <div class="profile-main">
+                <!-- Personal Information Section -->
+                <div class="profile-section" id="personal-info">
+                    <div class="section-header">
+                        <h2>Personal Information</h2>
+                        <button class="btn-edit" onclick="toggleEdit('personal')">Edit</button>
+                    </div>
+                    
+                    <form class="profile-form" id="personalInfoForm" action="/profile/update" method="POST">
+                        <input type="hidden" name="form_type" value="personal_info">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile_first_name">First Name</label>
+                                <input type="text" 
+                                       id="profile_first_name" 
+                                       name="first_name" 
+                                       value="{{ user.first_name }}"
+                                       readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile_last_name">Last Name</label>
+                                <input type="text" 
+                                       id="profile_last_name" 
+                                       name="last_name" 
+                                       value="{{ user.last_name }}"
+                                       readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profile_email">Email Address</label>
+                            <input type="email" 
+                                   id="profile_email" 
+                                   name="email" 
+                                   value="{{ user.email }}"
+                                   readonly>
+                            <small class="form-hint">Email cannot be changed for security reasons</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profile_phone">Phone Number</label>
+                            <input type="tel" 
+                                   id="profile_phone" 
+                                   name="phone" 
+                                   value="{{ user.phone }}"
+                                   readonly>
+                        </div>
+                        
+                        <div class="form-actions" style="display: none;">
+                            <button type="submit" class="btn-save">Save Changes</button>
+                            <button type="button" class="btn-cancel" onclick="cancelEdit('personal')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Security Section -->
+                <div class="profile-section" id="security">
+                    <div class="section-header">
+                        <h2>Security & Password</h2>
+                    </div>
+                    
+                    <div class="security-info">
+                        <div class="info-item">
+                            <span class="info-icon">🔐</span>
+                            <div class="info-content">
+                                <strong>Password</strong>
+                                <p>Last changed: {{ user.password_changed_at.strftime('%B %d, %Y') if user.password_changed_at else 'Never' }}</p>
+                            </div>
+                            <button class="btn-secondary" onclick="showPasswordForm()">Change Password</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Change Password Form (Hidden by default) -->
+                    <form class="profile-form password-form" id="passwordForm" action="/profile/change-password" method="POST" style="display: none;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="current_password">Current Password</label>
+                            <input type="password" 
+                                   id="current_password" 
+                                   name="current_password" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new_password">New Password</label>
+                            <input type="password" 
+                                   id="new_password" 
+                                   name="new_password" 
+                                   required
+                                   minlength="8">
+                            <small class="form-hint">Must be at least 8 characters</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm_new_password">Confirm New Password</label>
+                            <input type="password" 
+                                   id="confirm_new_password" 
+                                   name="confirm_new_password" 
+                                   required
+                                   minlength="8">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save">Update Password</button>
+                            <button type="button" class="btn-cancel" onclick="hidePasswordForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Preferences Section -->
+                <div class="profile-section" id="preferences">
+                    <div class="section-header">
+                        <h2>Preferences</h2>
+                    </div>
+                    
+                    <form class="profile-form" action="/profile/preferences" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <!-- Currency Preference -->
+                        <div class="form-group">
+                            <label for="preferred_currency">Preferred Currency</label>
+                            <select id="preferred_currency" name="preferred_currency">
+                                <option value="GBP" {% if user.preferred_currency == 'GBP' %}selected{% endif %}>GBP (£)</option>
+                                <option value="USD" {% if user.preferred_currency == 'USD' %}selected{% endif %}>USD ($)</option>
+                                <option value="EUR" {% if user.preferred_currency == 'EUR' %}selected{% endif %}>EUR (€)</option>
+                                <option value="NPR" {% if user.preferred_currency == 'NPR' %}selected{% endif %}>NPR (रू)</option>
+                                <option value="INR" {% if user.preferred_currency == 'INR' %}selected{% endif %}>INR (₹)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Email Notifications -->
+                        <div class="form-checkbox-group">
+                            <h3>Email Notifications</h3>
+                            
+                            <div class="form-checkbox">
+                                <input type="checkbox" 
+                                       id="email_bookings" 
+                                       name="email_bookings"
+                                       {% if user.email_bookings %}checked{% endif %}>
+                                <label for="email_bookings">Booking confirmations and updates</label>
+                            </div>
+                            
+                            <div class="form-checkbox">
+                                <input type="checkbox" 
+                                       id="email_promotions" 
+                                       name="email_promotions"
+                                       {% if user.email_promotions %}checked{% endif %}>
+                                <label for="email_promotions">Promotional offers and deals</label>
+                            </div>
+                            
+                            <div class="form-checkbox">
+                                <input type="checkbox" 
+                                       id="email_reminders" 
+                                       name="email_reminders"
+                                       {% if user.email_reminders %}checked{% endif %}>
+                                <label for="email_reminders">Stay reminders (before check-in)</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save">Save Preferences</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Delete Account Section -->
+                <div class="profile-section danger-section">
+                    <div class="section-header">
+                        <h2>Danger Zone</h2>
+                    </div>
+                    
+                    <div class="danger-content">
+                        <div class="danger-item">
+                            <div class="danger-info">
+                                <strong>Delete Account</strong>
+                                <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                            </div>
+                            <button class="btn-danger" onclick="confirmDeleteAccount()">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Toggle edit mode for personal info
+    function toggleEdit(section) {
+        const form = document.getElementById('personalInfoForm');
+        const inputs = form.querySelectorAll('input:not([type="hidden"]):not([readonly][type="email"])');
+        const actions = form.querySelector('.form-actions');
+        const editBtn = form.closest('.profile-section').querySelector('.btn-edit');
+        
+        inputs.forEach(input => {
+            input.readOnly = !input.readOnly;
+        });
+        
+        actions.style.display = actions.style.display === 'none' ? 'flex' : 'none';
+        editBtn.textContent = editBtn.textContent === 'Edit' ? 'Cancel' : 'Edit';
+    }
+    
+    function cancelEdit(section) {
+        toggleEdit(section);
+        // Reset form to original values
+        document.getElementById('personalInfoForm').reset();
+    }
+    
+    // Show password change form
+    function showPasswordForm() {
+        document.getElementById('passwordForm').style.display = 'block';
+    }
+    
+    function hidePasswordForm() {
+        document.getElementById('passwordForm').style.display = 'none';
+        document.getElementById('passwordForm').reset();
+    }
+    
+    // Confirm account deletion
+    function confirmDeleteAccount() {
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            if (confirm('This will permanently delete all your bookings and data. Are you absolutely sure?')) {
+                // Submit delete request
+                window.location.href = '/profile/delete';
+            }
+        }
+    }
+    
+    // Password match validation
+    document.getElementById('passwordForm')?.addEventListener('submit', function(e) {
+        const newPass = document.getElementById('new_password').value;
+        const confirmPass = document.getElementById('confirm_new_password').value;
+        
+        if (newPass !== confirmPass) {
+            e.preventDefault();
+            alert('New passwords do not match!');
+        }
+    });
+</script>
+{% endblock %}

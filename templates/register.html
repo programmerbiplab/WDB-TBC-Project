@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}Register - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Register Section -->
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-box">
+                <!-- Register Header -->
+                <div class="auth-header">
+                    <h1>Create Account</h1>
+                    <p>Join World Hotels for exclusive benefits and easy booking</p>
+                </div>
+                
+                <!-- Register Form -->
+                <form class="auth-form" action="/register" method="POST" id="registerForm">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <!-- First Name -->
+                    <div class="form-group">
+                        <label for="first_name">First Name *</label>
+                        <input type="text" 
+                               id="first_name" 
+                               name="first_name" 
+                               required
+                               placeholder="John"
+                               autocomplete="given-name">
+                    </div>
+                    
+                    <!-- Last Name -->
+                    <div class="form-group">
+                        <label for="last_name">Last Name *</label>
+                        <input type="text" 
+                               id="last_name" 
+                               name="last_name" 
+                               required
+                               placeholder="Smith"
+                               autocomplete="family-name">
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="register_email">Email Address *</label>
+                        <input type="email" 
+                               id="register_email" 
+                               name="email" 
+                               required
+                               placeholder="your.email@example.com"
+                               autocomplete="email">
+                        <small class="form-hint">We'll send booking confirmations to this email</small>
+                    </div>
+                    
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" 
+                               id="phone" 
+                               name="phone" 
+                               required
+                               placeholder="+44 7700 900000"
+                               autocomplete="tel">
+                    </div>
+                    
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="register_password">Password *</label>
+                        <input type="password" 
+                               id="register_password" 
+                               name="password" 
+                               required
+                               minlength="8"
+                               placeholder="At least 8 characters"
+                               autocomplete="new-password">
+                        <small class="form-hint">Must be at least 8 characters</small>
+                        
+                        <!-- Password Strength Indicator -->
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar"></div>
+                            <span class="strength-text"></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password *</label>
+                        <input type="password" 
+                               id="confirm_password" 
+                               name="confirm_password" 
+                               required
+                               minlength="8"
+                               placeholder="Re-enter your password"
+                               autocomplete="new-password">
+                    </div>
+                    
+                    <!-- Terms & Conditions -->
+                    <div class="form-checkbox">
+                        <input type="checkbox" 
+                               id="accept_terms" 
+                               name="accept_terms" 
+                               required>
+                        <label for="accept_terms">
+                            I agree to the <a href="/terms" target="_blank">Terms & Conditions</a> 
+                            and <a href="/privacy" target="_blank">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <!-- Marketing Consent (Optional) -->
+                    <div class="form-checkbox">
+                        <input type="checkbox" 
+                               id="marketing_consent" 
+                               name="marketing_consent">
+                        <label for="marketing_consent">
+                            Send me exclusive deals and promotions (optional)
+                        </label>
+                    </div>
+                    
+                    <!-- Register Button -->
+                    <button type="submit" class="btn-auth">Create Account</button>
+                </form>
+                
+                <!-- Divider -->
+                <div class="auth-divider">
+                    <span>OR</span>
+                </div>
+                
+                <!-- Login Link -->
+                <div class="auth-alternative">
+                    <p>Already have an account? <a href="/login">Login here</a></p>
+                </div>
+            </div>
+            
+            <!-- Side Info -->
+            <div class="auth-benefits">
+                <h3>Join World Hotels Today</h3>
+                <ul class="benefits-list">
+                    <li>
+                        <span class="benefit-icon">🎉</span>
+                        <div>
+                            <strong>Welcome Offer</strong>
+                            <p>Get 10% off your first booking</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="benefit-icon">🔒</span>
+                        <div>
+                            <strong>Secure & Private</strong>
+                            <p>Your data is protected with encryption</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="benefit-icon">📱</span>
+                        <div>
+                            <strong>Easy Management</strong>
+                            <p>Book and manage on any device</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="benefit-icon">💯</span>
+                        <div>
+                            <strong>No Hidden Fees</strong>
+                            <p>What you see is what you pay</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Password strength indicator
+    const passwordInput = document.getElementById('register_password');
+    const strengthIndicator = document.getElementById('passwordStrength');
+    
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        let strength = 0;
+        
+        // Check length
+        if (password.length >= 8) strength++;
+        if (password.length >= 12) strength++;
+        
+        // Check for numbers
+        if (/\d/.test(password)) strength++;
+        
+        // Check for lowercase and uppercase
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+        
+        // Check for special characters
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
+        
+        // Update indicator
+        const bar = strengthIndicator.querySelector('.strength-bar');
+        const text = strengthIndicator.querySelector('.strength-text');
+        
+        bar.className = 'strength-bar';
+        if (strength <= 2) {
+            bar.classList.add('weak');
+            text.textContent = 'Weak';
+        } else if (strength <= 3) {
+            bar.classList.add('medium');
+            text.textContent = 'Medium';
+        } else {
+            bar.classList.add('strong');
+            text.textContent = 'Strong';
+        }
+        
+        bar.style.width = (strength * 20) + '%';
+    });
+    
+    // Password match validation
+    const confirmPassword = document.getElementById('confirm_password');
+    const form = document.getElementById('registerForm');
+    
+    form.addEventListener('submit', function(e) {
+        if (passwordInput.value !== confirmPassword.value) {
+            e.preventDefault();
+            alert('Passwords do not match!');
+            confirmPassword.focus();
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Hotels - Admin - World Hotels{% endblock %}
+
+{% block content %}
+<!-- Admin Header -->
+<section class="admin-header">
+    <div class="container">
+        <div class="admin-header-content">
+            <h1>Manage Hotels</h1>
+            <p>View, add, edit, and remove hotel locations</p>
+        </div>
+        <div class="admin-actions">
+            <a href="/admin/dashboard" class="btn-secondary">← Back to Dashboard</a>
+            <a href="/admin/hotels/add" class="btn-primary">+ Add New Hotel</a>
+        </div>
+    </div>
+</section>
+
+<!-- Hotels List -->
+<section class="admin-content">
+    <div class="container">
+        <!-- Filters -->
+        <div class="admin-filters">
+            <form class="filter-form" method="GET">
+                <div class="filter-group">
+                    <label for="filter_city">Filter by City</label>
+                    <select name="city" id="filter_city">
+                        <option value="">All Cities</option>
+                        <option value="London">London</option>
+                        <option value="Edinburgh">Edinburgh</option>
+                        <option value="Manchester">Manchester</option>
+                        <option value="Birmingham">Birmingham</option>
+                        <!-- Add all 17 cities -->
+                    </select>
+                </div>
+                <button type="submit" class="btn-filter">Apply Filter</button>
+            </form>
+        </div>
+        
+        <!-- Hotels Table -->
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Hotel ID</th>
+                        <th>City</th>
+                        <th>Capacity</th>
+                        <th>Address</th>
+                        <th>Available Rooms</th>
+                        <th>Occupancy</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if hotels %}
+                        {% for hotel in hotels %}
+                        <tr>
+                            <td>#{{ hotel.hotel_id }}</td>
+                            <td><strong>{{ hotel.city }}</strong></td>
+                            <td>{{ hotel.capacity }} rooms</td>
+                            <td>{{ hotel.address }}</td>
+                            <td>{{ hotel.available_rooms or 0 }}</td>
+                            <td>
+                                <div class="occupancy-bar">
+                                    <div class="occupancy-fill" style="width: {{ hotel.occupancy_rate or 0 }}%"></div>
+                                    <span>{{ hotel.occupancy_rate or 0 }}%</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="/admin/hotels/edit/{{ hotel.hotel_id }}" class="btn-sm btn-edit">Edit</a>
+                                    <a href="/admin/hotels/rooms/{{ hotel.hotel_id }}" class="btn-sm btn-view">Rooms</a>
+                                    <button onclick="deleteHotel({{ hotel.hotel_id }}, '{{ hotel.city }}')" 
+                                            class="btn-sm btn-delete">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center">No hotels found</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Summary Stats -->
+        <div class="admin-summary">
+            <div class="summary-item">
+                <strong>Total Hotels:</strong> {{ hotels|length or 0 }}
+            </div>
+            <div class="summary-item">
+                <strong>Total Capacity:</strong> {{ total_capacity or 0 }} rooms
+            </div>
+            <div class="summary-item">
+                <strong>Total Available:</strong> {{ total_available or 0 }} rooms
+            </div>
+            <div class="summary-item">
+                <strong>Average Occupancy:</strong> {{ avg_occupancy or 0 }}%
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add/Edit Hotel Modal (Hidden by default) -->
+<div class="modal" id="hotelModal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Add New Hotel</h2>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        
+        <form class="admin-form" action="/admin/hotels/save" method="POST">
+            <input type="hidden" name="hotel_id" id="hotel_id">
+            
+            <div class="form-group">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="capacity">Capacity (Number of Rooms) *</label>
+                <input type="number" id="capacity" name="capacity" required min="1">
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address *</label>
+                <textarea id="address" name="address" required rows="3"></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-save">Save Hotel</button>
+                <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-content {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .modal-header h2 {
+        margin: 0;
+        color: var(--primary-color);
+    }
+    
+    .close-modal {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #6b7280;
+    }
+    
+    .close-modal:hover {
+        color: var(--error);
+    }
+    
+    .admin-form .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .admin-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+    
+    .admin-form input,
+    .admin-form textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-md);
+        font-size: 1rem;
+    }
+    
+    .admin-form input:focus,
+    .admin-form textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .btn-save {
+        flex: 1;
+        padding: 0.875rem;
+        background: var(--success);
+        color: white;
+        border: none;
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        cursor: pointer;
+    }
+    
+    .btn-save:hover {
+        background: #059669;
+    }
+    
+    .btn-cancel {
+        flex: 1;
+        padding: 0.875rem;
+        background: var(--secondary-color);
+        color: white;
+        border: none;
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        cursor: pointer;
+    }
+    
+    .btn-cancel:hover {
+        background: #5a6268;
+    }
+    
+    /* Occupancy Bar */
+    .occupancy-bar {
+        position: relative;
+        width: 100px;
+        height: 24px;
+        background: #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    .occupancy-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+        transition: width 0.3s ease;
+    }
+    
+    .occupancy-bar span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        z-index: 1;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function deleteHotel(hotelId, cityName) {
+        if (confirm('Are you sure you want to delete ' + cityName + ' hotel?\n\nThis will also delete all rooms and may affect existing bookings.')) {
+            if (confirm('This action cannot be undone. Are you absolutely sure?')) {
+                window.location.href = '/admin/hotels/delete/' + hotelId;
+            }
+        }
+    }
+    
+    function closeModal() {
+        var modal = document.getElementById('hotelModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+    
+    // Show modal when clicking "Add New Hotel"
+    document.addEventListener('DOMContentLoaded', function() {
+        var addBtn = document.querySelector('a[href="/admin/hotels/add"]');
+        if (addBtn) {
+            addBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                var modal = document.getElementById('hotelModal');
+                var title = document.getElementById('modalTitle');
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+                if (title) {
+                    title.textContent = 'Add New Hotel';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

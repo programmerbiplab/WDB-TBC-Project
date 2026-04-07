@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Hotels - World Hotels UK{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Our Hotels Across the UK</h1>
+        <p>Find your perfect stay in 17 beautiful cities</p>
+    </div>
+</section>
+
+<!-- Filters Section -->
+<section class="filters-section">
+    <div class="container">
+        <form class="filters-form" method="GET" action="/hotels">
+            <div class="filter-grid">
+                <!-- City Filter -->
+                <div class="filter-group">
+                    <label for="filter_city">City</label>
+                    <select name="city" id="filter_city">
+                        <option value="">All Cities</option>
+                        {% for city_item in all_cities %}
+                        <option value="{{ city_item.city }}" {% if filters.city == city_item.city %}selected{% endif %}>
+                            {{ city_item.city }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <!-- Room Type Filter -->
+                <div class="filter-group">
+                    <label for="filter_room_type">Room Type</label>
+                    <select name="room_type" id="filter_room_type">
+                        <option value="">All Types</option>
+                        <option value="Standard" {% if filters.room_type == 'Standard' %}selected{% endif %}>Standard (1 Guest)</option>
+                        <option value="Double" {% if filters.room_type == 'Double' %}selected{% endif %}>Double (2 Guests)</option>
+                        <option value="Family" {% if filters.room_type == 'Family' %}selected{% endif %}>Family (4 Guests)</option>
+                    </select>
+                </div>
+                
+                <!-- Number of Guests -->
+                <div class="filter-group">
+                    <label for="filter_guests">Guests</label>
+                    <select name="guests" id="filter_guests">
+                        <option value="">Any</option>
+                        <option value="1" {% if filters.guests == '1' %}selected{% endif %}>1 Guest</option>
+                        <option value="2" {% if filters.guests == '2' %}selected{% endif %}>2 Guests</option>
+                        <option value="3" {% if filters.guests == '3' %}selected{% endif %}>3 Guests</option>
+                        <option value="4" {% if filters.guests == '4' %}selected{% endif %}>4+ Guests</option>
+                    </select>
+                </div>
+                
+                <!-- Check-in Date -->
+                <div class="filter-group">
+                    <label for="filter_check_in">Check-in</label>
+                    <input type="date" 
+                           name="check_in" 
+                           id="filter_check_in" 
+                           value="{{ filters.check_in }}">
+                </div>
+                
+                <!-- Check-out Date -->
+                <div class="filter-group">
+                    <label for="filter_check_out">Check-out</label>
+                    <input type="date" 
+                           name="check_out" 
+                           id="filter_check_out" 
+                           value="{{ filters.check_out }}">
+                </div>
+            </div>
+            
+            <!-- Price Range Filter -->
+            <div class="price-filter-section">
+                <label>Price Range (per night)</label>
+                <div class="price-inputs">
+                    <div class="price-input-group">
+                        <span>£</span>
+                        <input type="number" 
+                               name="min_price" 
+                               placeholder="Min" 
+                               value="{{ filters.min_price }}"
+                               min="0">
+                    </div>
+                    <span class="price-separator">-</span>
+                    <div class="price-input-group">
+                        <span>£</span>
+                        <input type="number" 
+                               name="max_price" 
+                               placeholder="Max" 
+                               value="{{ filters.max_price }}"
+                               max="500">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sort By -->
+            <div class="sort-section">
+                <label for="sort_by">Sort By</label>
+                <select name="sort_by" id="sort_by">
+                    <option value="city" {% if filters.sort_by == 'city' %}selected{% endif %}>City (A-Z)</option>
+                    <option value="price_asc" {% if filters.sort_by == 'price_asc' %}selected{% endif %}>Price (Low to High)</option>
+                    <option value="price_desc" {% if filters.sort_by == 'price_desc' %}selected{% endif %}>Price (High to Low)</option>
+                    <option value="capacity" {% if filters.sort_by == 'capacity' %}selected{% endif %}>Capacity (Large to Small)</option>
+                </select>
+            </div>
+            
+            <!-- Filter Actions -->
+            <div class="filter-actions">
+                <button type="submit" class="btn-filter">Apply Filters</button>
+                <a href="/hotels" class="btn-clear">Clear All</a>
+            </div>
+        </form>
+        
+        <!-- Active Filters Display -->
+        {% if filters.city or filters.room_type or filters.check_in or filters.guests or filters.min_price or filters.max_price %}
+        <div class="active-filters">
+            <span class="filter-label">Active Filters:</span>
+            {% if filters.city %}
+                <span class="filter-tag">City: {{ filters.city }} <a href="{{ url_for('hotels', room_type=filters.room_type, check_in=filters.check_in, check_out=filters.check_out, guests=filters.guests, min_price=filters.min_price, max_price=filters.max_price, sort_by=filters.sort_by) }}">×</a></span>
+            {% endif %}
+            {% if filters.room_type %}
+                <span class="filter-tag">Room: {{ filters.room_type }} <a href="{{ url_for('hotels', city=filters.city, check_in=filters.check_in, check_out=filters.check_out, guests=filters.guests, min_price=filters.min_price, max_price=filters.max_price, sort_by=filters.sort_by) }}">×</a></span>
+            {% endif %}
+            {% if filters.guests %}
+                <span class="filter-tag">{{ filters.guests }} Guest(s) <a href="{{ url_for('hotels', city=filters.city, room_type=filters.room_type, check_in=filters.check_in, check_out=filters.check_out, min_price=filters.min_price, max_price=filters.max_price, sort_by=filters.sort_by) }}">×</a></span>
+            {% endif %}
+            {% if filters.check_in and filters.check_out %}
+                <span class="filter-tag">{{ filters.check_in }} to {{ filters.check_out }} <a href="{{ url_for('hotels', city=filters.city, room_type=filters.room_type, guests=filters.guests, min_price=filters.min_price, max_price=filters.max_price, sort_by=filters.sort_by) }}">×</a></span>
+            {% endif %}
+            {% if filters.min_price or filters.max_price %}
+                <span class="filter-tag">£{{ filters.min_price or 0 }} - £{{ filters.max_price or '∞' }} <a href="{{ url_for('hotels', city=filters.city, room_type=filters.room_type, check_in=filters.check_in, check_out=filters.check_out, guests=filters.guests, sort_by=filters.sort_by) }}">×</a></span>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Hotels List -->
+<section class="hotels-list-section">
+    <div class="container">
+        <!-- Results Count -->
+        <div class="results-header">
+            <p class="results-count">
+                {% if hotels %}
+                    Showing {{ hotels|length }} hotel(s)
+                {% else %}
+                    No hotels found
+                {% endif %}
+            </p>
+        </div>
+        
+        <!-- Hotels Grid -->
+        <div class="hotels-grid">
+            {% if hotels %}
+                {% for hotel in hotels %}
+                <div class="hotel-card">
+                    <!-- Hotel Image with Fallback -->
+                    <div class="hotel-image">
+                        <!-- Use Unsplash images for UK cities -->
+                        {% if hotel.city == 'London' %}
+                            <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=600&fit=crop&q=80" 
+                                 alt="London Hotel" loading="lazy">
+                        {% elif hotel.city == 'Manchester' %}
+                            <img src="https://images.unsplash.com/photo-1592894930475-d6cdfed57e0d?w=800&h=600&fit=crop&q=80" 
+                                 alt="Manchester Hotel" loading="lazy">
+                        {% elif hotel.city == 'Edinburgh' %}
+                            <img src="https://images.unsplash.com/photo-1555633514-abcee6ab92e9?w=800&h=600&fit=crop&q=80" 
+                                 alt="Edinburgh Hotel" loading="lazy">
+                        {% elif hotel.city == 'Birmingham' %}
+                            <img src="https://images.unsplash.com/photo-1602970120808-c44f9d810aaf?w=800&h=600&fit=crop&q=80" 
+                                 alt="Birmingham Hotel" loading="lazy">
+                        {% elif hotel.city == 'Liverpool' %}
+                            <img src="https://images.unsplash.com/photo-1598904794230-c74d9e7c9137?w=800&h=600&fit=crop&q=80" 
+                                 alt="Liverpool Hotel" loading="lazy">
+                        {% elif hotel.city == 'Bristol' %}
+                            <img src="https://images.unsplash.com/photo-1586713741382-bb2c3a23d7d2?w=800&h=600&fit=crop&q=80" 
+                                 alt="Bristol Hotel" loading="lazy">
+                        {% elif hotel.city == 'Leeds' %}
+                            <img src="https://images.unsplash.com/photo-1583421242806-4a9b36148412?w=800&h=600&fit=crop&q=80" 
+                                 alt="Leeds Hotel" loading="lazy">
+                        {% elif hotel.city == 'Newcastle' %}
+                            <img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=800&h=600&fit=crop&q=80" 
+                                 alt="Newcastle Hotel" loading="lazy">
+                        {% elif hotel.city == 'Sheffield' %}
+                            <img src="https://images.unsplash.com/photo-1605649487212-95da32c2c0c5?w=800&h=600&fit=crop&q=80" 
+                                 alt="Sheffield Hotel" loading="lazy">
+                        {% elif hotel.city == 'Glasgow' %}
+                            <img src="https://images.unsplash.com/photo-1527549993586-dff825b37782?w=800&h=600&fit=crop&q=80" 
+                                 alt="Glasgow Hotel" loading="lazy">
+                        {% elif hotel.city == 'Cardiff' %}
+                            <img src="https://images.unsplash.com/photo-1592845093439-db93e8ba6b90?w=800&h=600&fit=crop&q=80" 
+                                 alt="Cardiff Hotel" loading="lazy">
+                        {% elif hotel.city == 'Belfast' %}
+                            <img src="https://images.unsplash.com/photo-1590682680588-2d4c2d1d1c2e?w=800&h=600&fit=crop&q=80" 
+                                 alt="Belfast Hotel" loading="lazy">
+                        {% elif hotel.city == 'Nottingham' %}
+                            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop&q=80" 
+                                 alt="Nottingham Hotel" loading="lazy">
+                        {% elif hotel.city == 'Southampton' %}
+                            <img src="https://images.unsplash.com/photo-1599423300746-b62533397364?w=800&h=600&fit=crop&q=80" 
+                                 alt="Southampton Hotel" loading="lazy">
+                        {% elif hotel.city == 'Leicester' %}
+                            <img src="https://images.unsplash.com/photo-1529650237450-cd28d5a2d4f7?w=800&h=600&fit=crop&q=80" 
+                                 alt="Leicester Hotel" loading="lazy">
+                        {% elif hotel.city == 'Coventry' %}
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop&q=80" 
+                                 alt="Coventry Hotel" loading="lazy">
+                        {% elif hotel.city == 'Bradford' %}
+                            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=600&fit=crop&q=80" 
+                                 alt="Bradford Hotel" loading="lazy">
+                        {% else %}
+                            <!-- Generic UK hotel image for any other cities -->
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop&q=80" 
+                                 alt="{{ hotel.city }} Hotel" loading="lazy">
+                        {% endif %}
+                        
+                        <div class="hotel-badge">{{ hotel.capacity }} Rooms</div>
+                    </div>
+                    
+                    <!-- Hotel Info -->
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">World Hotels {{ hotel.city }}</h3>
+                        <p class="hotel-address">📍 {{ hotel.address }}</p>
+                        
+                        <!-- Hotel Features -->
+                        <div class="hotel-features">
+                            <span class="feature-badge">✓ Free WiFi</span>
+                            <span class="feature-badge">✓ Breakfast</span>
+                            <span class="feature-badge">✓ Mini-bar</span>
+                            <span class="feature-badge">✓ TV</span>
+                        </div>
+                        
+                        <!-- Room Types Available -->
+                        <div class="room-types-available">
+                            <p><strong>Room Types:</strong></p>
+                            <ul>
+                                <li>Standard (1 guest) - {{ (hotel.capacity * 0.30)|int }} rooms</li>
+                                <li>Double (2 guests) - {{ (hotel.capacity * 0.50)|int }} rooms</li>
+                                <li>Family (4 guests) - {{ (hotel.capacity * 0.20)|int }} rooms</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Pricing Info -->
+                        <div class="hotel-pricing">
+                            {% if hotel.price_from %}
+                                <p class="price-from">
+                                    Starting from
+                                    <span class="price">£{{ "%.2f"|format(hotel.price_from) }}</span>
+                                    <small style="font-size: 0.875rem; color: var(--text-muted);">per night</small>
+                                </p>
+                            {% else %}
+                                <p class="price-from">Prices vary by season</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="hotel-actions">
+                            <a href="/hotel/{{ hotel.hotel_id }}" class="btn-view-hotel">
+                                <span>📋 View Details</span>
+                            </a>
+                            <a href="/booking?hotel_id={{ hotel.hotel_id }}" class="btn-book-now">
+                                <span>Book Now</span>
+                            </a>
+                        </div>
+                {% endfor %}
+            {% else %}
+                <!-- No Results -->
+                <div class="no-results">
+                    <p>😔 No hotels match your search criteria.</p>
+                    <p style="color: var(--text-muted); font-size: 1rem;">Try adjusting your filters or browse all hotels.</p>
+                    <a href="/hotels" class="btn-primary" style="margin-top: var(--spacing-md);">View All Hotels</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/hotels.js') }}"></script>
+{% endblock %}
